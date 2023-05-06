@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: odoo
+  labels:
+    app: odoo  
+    env: prod
+  namespace: ic-webapp
+spec:
+  type: NodePort
+  selector: #label des pods qui seront declarés dans le deployment
+    app: odoo
+  ports:
+    - protocol: TCP
+      port: 8069 #port au choix 
+      targetPort: 8069 #port interne des pods qui seront dans le deploiement
+      nodePort: 30069

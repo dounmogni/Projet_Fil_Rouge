@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: postgres
+    env: prod
+  name: postgres
+  namespace: ic-webapp
+spec:
+  type: ClusterIP
+  selector:
+    app: postgres #le service selectionne les pods ayant pour label app=postgres
+  ports:
+  - port: 5432 #le service ecoute sur le port 5432
+    protocol: TCP
+    targetPort: 5432 #le service renvoie les requetes sur le port 5432 des pods selectionnés
+  
+   

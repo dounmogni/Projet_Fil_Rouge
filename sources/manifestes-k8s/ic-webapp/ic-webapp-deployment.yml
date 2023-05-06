@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    env: prod
+    app: ic-webapp
+  name: ic-webapp
+  namespace: ic-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: ic-webapp
+
+  template:
+    metadata:
+      labels:
+        app: ic-webapp
+    spec:
+      containers:
+      - image: dounmogni/ic_webapp:first #image presente sur dockerhub
+        name: ic-webapp
+        env:
+        - name: ODOO_URL
+          value: http://192.168.56.4:30069/ #ip et port de la machine
+        - name: PGADMIN_URL
+          value: http://192.168.56.4:30050/
+        ports:
+        - containerPort: 8080
+          name: ic-webapp
